@@ -62,7 +62,7 @@ class AppFactory
 
     protected static function prepareContainer(): ContainerInterface
     {
-        $config = new Config(ProviderConfig::load());var_dump($config);
+        $config = new Config(ProviderConfig::load());
         $config->set(StdoutLoggerInterface::class, [
             'log_level' => [
                 LogLevel::ALERT,
