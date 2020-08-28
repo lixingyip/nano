@@ -16,6 +16,7 @@ use Hyperf\DB\DB;
 use Hyperf\Framework\Event\BootApplication;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Hyperf\Nano\Factory\AppFactory;
+use Swlib\SaberGM;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -36,6 +37,24 @@ $app->get('/', function () {
         'message' => "hello {$user}",
         'method' => $method,
     ];
+});
+
+$app->get('/test', function () {
+    try {
+//        $res = SaberGM::get('http://10.10.107.151:9502');var_dump($res->getBody()->getContents());
+        $requests = [];
+        for ($i = 6666; $i--;) {
+            $requests[] = ['uri' => 'http://10.10.107.151:9502'];
+        }
+        $res = SaberGM::requests($requests);
+        echo "use {$res->time}s\n";
+        echo "success: $res->success_num, error: $res->error_num";
+        return 'success';
+    } catch (\Exception $e) {
+        var_dump($e->getMessage());
+        return 'error';
+    }
+
 });
 
 $app->addGroup('/route', function () use ($app) {
