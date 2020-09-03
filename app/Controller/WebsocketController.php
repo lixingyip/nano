@@ -1,14 +1,21 @@
 <?php
 
 declare(strict_types=1);
-
+/**
+ * This file is part of Hyperf Nano.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://nano.hyperf.wiki
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf/nano/blob/master/LICENSE
+ */
 namespace App\Controller;
 
 use Hyperf\Contract\OnCloseInterface;
 use Hyperf\Contract\OnMessageInterface;
 use Hyperf\Contract\OnOpenInterface;
-use Swoole\Websocket\Frame;
 use Swoole\Http\Request;
+use Swoole\Websocket\Frame;
 
 class WebsocketController implements OnMessageInterface, OnOpenInterface, OnCloseInterface
 {

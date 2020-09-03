@@ -14,16 +14,16 @@ use Hyperf\Server\SwooleEvent;
 
 return [
     'servers' => [
-//        [
-//            'name' => 'http',
-//            'type' => Server::SERVER_HTTP,
-//            'host' => '0.0.0.0',
-//            'port' => 9501,
-//            'sock_type' => SWOOLE_SOCK_TCP,
-//            'callbacks' => [
-//                SwooleEvent::ON_REQUEST => [Hyperf\HttpServer\Server::class, 'onRequest'],
-//            ],
-//        ],
+        //        [
+        //            'name' => 'http',
+        //            'type' => Server::SERVER_HTTP,
+        //            'host' => '0.0.0.0',
+        //            'port' => 9501,
+        //            'sock_type' => SWOOLE_SOCK_TCP,
+        //            'callbacks' => [
+        //                SwooleEvent::ON_REQUEST => [Hyperf\HttpServer\Server::class, 'onRequest'],
+        //            ],
+        //        ],
         [
             'name' => 'ws',
             'type' => Server::SERVER_WEBSOCKET,
@@ -37,21 +37,20 @@ return [
             ],
         ],
     ],
-//    'settings' => [
-//        'enable_coroutine' => true,
-//        'worker_num' => 1,
-//        'open_tcp_nodelay' => true,
-//        'max_coroutine' => 100000,
-//        'open_http2_protocol' => true,
-//        'max_request' => 0,
-//        'socket_buffer_size' => 2 * 1024 * 1024,
-//        'buffer_output_size' => 2 * 1024 * 1024,
-//    ],
-//    'callbacks' => [
-//        SwooleEvent::ON_BEFORE_START => [Hyperf\Framework\Bootstrap\ServerStartCallback::class, 'beforeStart'],
-//        SwooleEvent::ON_WORKER_START => [Hyperf\Framework\Bootstrap\WorkerStartCallback::class, 'onWorkerStart'],
-//        SwooleEvent::ON_WORKER_EXIT => [Hyperf\Framework\Bootstrap\WorkerExitCallback::class, 'onWorkerExit'],
-//        SwooleEvent::ON_PIPE_MESSAGE => [Hyperf\Framework\Bootstrap\PipeMessageCallback::class, 'onPipeMessage'],
-//    ],
-
+    //    'settings' => [
+    //        'enable_coroutine' => true,
+    //        'worker_num' => 1,
+    //        'open_tcp_nodelay' => true,
+    //        'max_coroutine' => 100000,
+    //        'open_http2_protocol' => true,
+    //        'max_request' => 0,
+    //        'socket_buffer_size' => 2 * 1024 * 1024,
+    //        'buffer_output_size' => 2 * 1024 * 1024,
+    //    ],
+    //    'callbacks' => [
+    //        SwooleEvent::ON_BEFORE_START => [Hyperf\Framework\Bootstrap\ServerStartCallback::class, 'beforeStart'],
+    //        SwooleEvent::ON_WORKER_START => [Hyperf\Framework\Bootstrap\WorkerStartCallback::class, 'onWorkerStart'],
+    //        SwooleEvent::ON_WORKER_EXIT => [Hyperf\Framework\Bootstrap\WorkerExitCallback::class, 'onWorkerExit'],
+    //        SwooleEvent::ON_PIPE_MESSAGE => [Hyperf\Framework\Bootstrap\PipeMessageCallback::class, 'onPipeMessage'],
+    //    ],
 ];

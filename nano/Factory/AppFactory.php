@@ -18,15 +18,13 @@ use Hyperf\Contract\ContainerInterface;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Di\Container;
 use Hyperf\Di\Definition\DefinitionSource;
-use Hyperf\Di\Definition\ScanConfig;
 use Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler;
 use Hyperf\HttpServer\Router\DispatcherFactory;
+use Hyperf\Utils\ApplicationContext;
 use Nano\App;
 use Nano\BoundInterface;
 use Nano\ContainerProxy;
 use Nano\Preset\Preset;
-use Hyperf\Utils\ApplicationContext;
-use Hyperf\WebSocketServer\Exception\Handler\WebSocketExceptionHandler;
 use Psr\Log\LogLevel;
 use Symfony\Component\Finder\Finder;
 
@@ -81,7 +79,7 @@ class AppFactory
             'log_level' => [
                 LogLevel::ALERT,
                 LogLevel::CRITICAL,
-//                LogLevel::DEBUG,
+                //                LogLevel::DEBUG,
                 LogLevel::EMERGENCY,
                 LogLevel::ERROR,
                 LogLevel::INFO,
