@@ -26,6 +26,7 @@ use Hyperf\Nano\BoundInterface;
 use Hyperf\Nano\ContainerProxy;
 use Hyperf\Nano\Preset\Preset;
 use Hyperf\Utils\ApplicationContext;
+use Hyperf\WebSocketServer\Exception\Handler\WebSocketExceptionHandler;
 use Psr\Log\LogLevel;
 
 class AppFactory
@@ -60,6 +61,18 @@ class AppFactory
         return $app;
     }
 
+    public static function createWebsocket(string $host = '0.0.0.0', int $port = 9502): App
+    {
+        $app = self::createApp();
+        $app->config([
+            'server' => Preset::websocket(),
+            'server.servers.0.host' => $host,
+            'server.servers.0.port' => $port,
+        ]);
+        $app->addExceptionHandler(HttpExceptionHandler::class);
+        return $app;
+    }
+
     protected static function prepareContainer(): ContainerInterface
     {
         $config = new Config(ProviderConfig::load());
@@ -75,7 +88,7 @@ class AppFactory
                 LogLevel::WARNING,
             ],
         ]);
-        $container = new Container(new DefinitionSource($config->get('dependencies'), new ScanConfig()));
+        $container = new Container(new DefinitionSource($config->get('dependencies')));
         $container->set(ConfigInterface::class, $config);
         $container->define(DispatcherFactory::class, DispatcherFactory::class);
         $container->define(BoundInterface::class, ContainerProxy::class);

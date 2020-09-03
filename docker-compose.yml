@@ -15,7 +15,9 @@ services:
     image: "swoole452:latest"
     container_name: nano
     ports:
-      - "9505:9501"
+      - "9511:9501"
+      - "9512:9502"
+      - "9513:9503"
     volumes:
       - "d:/phpstudy_pro/WWW/nano:/opt/www:cached"
     networks:

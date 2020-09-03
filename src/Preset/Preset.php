@@ -28,4 +28,9 @@ class Preset
     {
         return include __DIR__ . '/Base.php';
     }
+
+    public static function websocket(): array
+    {
+        return include __DIR__ . '/Websocket.php';
+    }
 }

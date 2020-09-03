@@ -10,7 +10,8 @@
     "description": "Scale Hyperf application down to a single file",
     "autoload": {
         "psr-4": {
-            "Hyperf\\Nano\\": "src/"
+            "Hyperf\\Nano\\": "src/",
+            "App\\": "app/"
         }
     },
     "require": {
@@ -22,6 +23,7 @@
         "hyperf/framework": "~2.0.0",
         "hyperf/http-server": "~2.0.0",
         "hyperf/utils": "~2.0.0",
+        "hyperf/websocket-server": "^2.0",
         "swlib/saber": "^1.0"
     },
     "require-dev": {
