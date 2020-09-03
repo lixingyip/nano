@@ -28,6 +28,7 @@ use Hyperf\Nano\Preset\Preset;
 use Hyperf\Utils\ApplicationContext;
 use Hyperf\WebSocketServer\Exception\Handler\WebSocketExceptionHandler;
 use Psr\Log\LogLevel;
+use Symfony\Component\Finder\Finder;
 
 class AppFactory
 {
@@ -88,6 +89,13 @@ class AppFactory
                 LogLevel::WARNING,
             ],
         ]);
+
+        $finder = new Finder();
+        $finder->files()->in(BASE_PATH . '/config')->name('*.php');
+        foreach ($finder as $file) {
+            $config->set($file->getFilenameWithoutExtension(), require $file->getRealPath());
+        }
+
         $container = new Container(new DefinitionSource($config->get('dependencies')));
         $container->set(ConfigInterface::class, $config);
         $container->define(DispatcherFactory::class, DispatcherFactory::class);
