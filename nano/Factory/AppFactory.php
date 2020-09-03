@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/nano/blob/master/LICENSE
  */
-namespace Hyperf\Nano\Factory;
+namespace Nano\Factory;
 
 use Hyperf\Config\Config;
 use Hyperf\Config\ProviderConfig;
@@ -21,10 +21,10 @@ use Hyperf\Di\Definition\DefinitionSource;
 use Hyperf\Di\Definition\ScanConfig;
 use Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler;
 use Hyperf\HttpServer\Router\DispatcherFactory;
-use Hyperf\Nano\App;
-use Hyperf\Nano\BoundInterface;
-use Hyperf\Nano\ContainerProxy;
-use Hyperf\Nano\Preset\Preset;
+use Nano\App;
+use Nano\BoundInterface;
+use Nano\ContainerProxy;
+use Nano\Preset\Preset;
 use Hyperf\Utils\ApplicationContext;
 use Hyperf\WebSocketServer\Exception\Handler\WebSocketExceptionHandler;
 use Psr\Log\LogLevel;

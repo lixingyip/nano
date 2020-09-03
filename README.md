@@ -31,7 +31,7 @@ Create a single PHP file, like `index.php`:
 
 ```php
 <?php
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -68,7 +68,7 @@ That's all you need.
 
 ```php
 <?php
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -89,8 +89,8 @@ $app->run();
 ### DI Container 
 ```php
 <?php
-use Hyperf\Nano\ContainerProxy;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\ContainerProxy;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -116,7 +116,7 @@ $app->run();
 ### Middleware
 ```php
 <?php
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -141,7 +141,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\HttpMessage\Stream\SwooleStream;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -164,7 +164,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -187,7 +187,7 @@ php index.php echo
 <?php
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Framework\Event\BootApplication;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -204,7 +204,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -225,7 +225,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -243,7 +243,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\DB\DB;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 

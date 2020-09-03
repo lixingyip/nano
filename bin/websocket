@@ -1,11 +1,12 @@
+#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
 
-namespace Hyperf\Nano;
+namespace Bin;
 
 use App\Controller\WebsocketController;
-use Hyperf\Nano\Factory\AppFactory;
+use Nano\Factory\AppFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

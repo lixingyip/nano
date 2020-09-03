@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/nano/blob/master/LICENSE
  */
-namespace Hyperf\Nano;
+namespace Nano;
 
 /*
  * This file is part of Hyperf.

@@ -37,7 +37,7 @@ composer require hyperf/nano
 
 ```php
 <?php
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -74,7 +74,7 @@ php index.php start
 
 ```php
 <?php
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -95,8 +95,8 @@ $app->run();
 ### DI 容器
 ```php
 <?php
-use Hyperf\Nano\ContainerProxy;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\ContainerProxy;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -122,7 +122,7 @@ $app->run();
 ### 中间件
 ```php
 <?php
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -147,7 +147,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\HttpMessage\Stream\SwooleStream;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -170,7 +170,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -195,7 +195,7 @@ php index.php echo
 <?php
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Framework\Event\BootApplication;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -213,7 +213,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -234,7 +234,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -252,7 +252,7 @@ $app->run();
 ```php
 <?php
 
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 use Hyperf\Amqp;
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -343,7 +343,7 @@ $app->run();
 ```php
 <?php
 use Hyperf\DB\DB;
-use Hyperf\Nano\Factory\AppFactory;
+use Hyperf\nano\Factory\AppFactory;
 
 require_once __DIR__ . '/vendor/autoload.php';
 

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/nano/blob/master/LICENSE
  */
-namespace Hyperf\Nano;
+namespace Nano;
 
 use Closure;
 use Hyperf\Contract\ConfigInterface;
@@ -17,11 +17,11 @@ use Hyperf\Contract\ContainerInterface;
 use Hyperf\Crontab\Crontab;
 use Hyperf\Crontab\Process\CrontabDispatcherProcess;
 use Hyperf\HttpServer\Router\DispatcherFactory;
-use Hyperf\Nano\Factory\CommandFactory;
-use Hyperf\Nano\Factory\CronFactory;
-use Hyperf\Nano\Factory\ExceptionHandlerFactory;
-use Hyperf\Nano\Factory\MiddlewareFactory;
-use Hyperf\Nano\Factory\ProcessFactory;
+use Nano\Factory\CommandFactory;
+use Nano\Factory\CronFactory;
+use Nano\Factory\ExceptionHandlerFactory;
+use Nano\Factory\MiddlewareFactory;
+use Nano\Factory\ProcessFactory;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use Psr\Http\Server\MiddlewareInterface;
 

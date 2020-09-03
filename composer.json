@@ -10,7 +10,7 @@
     "description": "Scale Hyperf application down to a single file",
     "autoload": {
         "psr-4": {
-            "Hyperf\\Nano\\": "src/",
+            "Nano\\": "nano/",
             "App\\": "app/"
         }
     },

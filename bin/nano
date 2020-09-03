@@ -1,21 +1,15 @@
+#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
-/**
- * This file is part of Hyperf Nano.
- *
- * @link     https://www.hyperf.io
- * @document https://nano.hyperf.wiki
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf/nano/blob/master/LICENSE
- */
-namespace Hyperf\Nano;
+
+namespace Bin;
 
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\DB\DB;
 use Hyperf\Framework\Event\BootApplication;
 use Hyperf\HttpMessage\Stream\SwooleStream;
-use Hyperf\Nano\Factory\AppFactory;
+use Nano\Factory\AppFactory;
 use Swlib\SaberGM;
 
 require_once __DIR__ . '/../vendor/autoload.php';

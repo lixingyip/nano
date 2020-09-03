@@ -9,17 +9,18 @@ declare(strict_types=1);
  * @contact  group@hyperf.io
  * @license  https://github.com/hyperf/nano/blob/master/LICENSE
  */
-namespace Hyperf\Nano\Factory;
+namespace Nano\Factory;
 
-use Hyperf\ExceptionHandler\ExceptionHandler;
 use Psr\Http\Message\ResponseInterface;
-use Throwable;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class ExceptionHandlerFactory
+class MiddlewareFactory
 {
-    public function create(\Closure $closure): ExceptionHandler
+    public function create(\Closure $closure): MiddlewareInterface
     {
-        return new class($closure) extends ExceptionHandler {
+        return new class($closure) implements MiddlewareInterface {
             /**
              * @var \Closure
              */
@@ -30,14 +31,9 @@ class ExceptionHandlerFactory
                 $this->closure = $closure;
             }
 
-            public function handle(Throwable $throwable, ResponseInterface $response)
+            public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
             {
-                return call($this->closure, [$throwable, $response]);
-            }
-
-            public function isValid(Throwable $throwable): bool
-            {
-                return true;
+                return call($this->closure, [$request, $handler]);
             }
         };
     }
