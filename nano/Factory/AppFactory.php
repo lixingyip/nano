@@ -32,6 +32,9 @@ class AppFactory
 {
     /**
      * Create an application.
+     * @param string $host
+     * @param int $port
+     * @return App
      */
     public static function create(string $host = '0.0.0.0', int $port = 9501): App
     {
@@ -47,6 +50,9 @@ class AppFactory
 
     /**
      * Create a single worker application in base mode, with max_requests = 0.
+     * @param string $host
+     * @param int $port
+     * @return App
      */
     public static function createBase(string $host = '0.0.0.0', int $port = 9501): App
     {
@@ -60,6 +66,11 @@ class AppFactory
         return $app;
     }
 
+    /**
+     * @param string $host
+     * @param int $port
+     * @return App
+     */
     public static function createWebsocket(string $host = '0.0.0.0', int $port = 9502): App
     {
         $app = self::createApp();
@@ -79,7 +90,7 @@ class AppFactory
             'log_level' => [
                 LogLevel::ALERT,
                 LogLevel::CRITICAL,
-                //                LogLevel::DEBUG,
+//                LogLevel::DEBUG,
                 LogLevel::EMERGENCY,
                 LogLevel::ERROR,
                 LogLevel::INFO,
@@ -103,9 +114,6 @@ class AppFactory
         return $container;
     }
 
-    /**
-     * Setup flags, ini settings and constants.
-     */
     protected static function prepareFlags(int $hookFlags = SWOOLE_HOOK_ALL)
     {
         ini_set('display_errors', 'on');
