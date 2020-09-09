@@ -11,6 +11,7 @@ use Hyperf\Framework\Event\BootApplication;
 use Hyperf\HttpMessage\Stream\SwooleStream;
 use Nano\Factory\AppFactory;
 use Swlib\SaberGM;
+use Symfony\Component\Finder\Finder;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -24,14 +25,54 @@ class Foo
 
 $app = AppFactory::createBase();
 
-$app->get('/', function () {
-    $user = $this->request->input('user', 'nano');
-    $method = $this->request->getMethod();
-    return [
-        'message' => "hello {$user}",
-        'method' => $method,
-    ];
+$finder = new Finder();
+$finder->files()->in(BASE_PATH . '/json')->name('*.json');
+$json = [];
+foreach ($finder as $file) {
+    $json[$file->getFilenameWithoutExtension()] = json_decode($file->getContents(), true);
+}
+
+$app->get('/', function () use ($json) {
+    return 'index';
 });
+
+$app->post('/welcomeHome', function () use ($json) {
+    return $this->response->json($json['welcomeHome']);
+});
+$app->post('/personinfoBusiness', function () use ($json) {
+    return $this->response->json($json['personinfoBusiness']);
+});
+$app->post('/uniformRecommend', function () use ($json) {
+    return $this->response->json($json['uniformRecommend']);
+});
+$app->post('/newAppCenterInfo', function () use ($json) {
+    return $this->response->json($json['newAppCenterInfo']);
+});
+$app->post('/commonCatalogs', function () use ($json) {
+    return $this->response->json($json['commonCatalogs']);
+});
+$app->post('/category', function () use ($json) {
+    return $this->response->json($json['category']);
+});
+$app->post('/newSubCatalog', function () use ($json) {
+    return $this->response->json($json['newSubCatalog']);
+});
+$app->post('/getCmsPromotionsListByCatelogyID', function () use ($json) {
+    return $this->response->json($json['getCmsPromotionsListByCatelogyID']);
+});
+$app->post('/wareBusiness', function () use ($json) {
+    return $this->response->json($json['wareBusiness']);
+});
+$app->post('/entranceCatalog', function () use ($json) {
+    return $this->response->json($json['entranceCatalog']);
+});
+$app->post('/cart', function () use ($json) {
+    return $this->response->json($json['cart']);
+});
+$app->post('/myjdSetBusiness', function () use ($json) {
+    return $this->response->json($json['myjdSetBusiness']);
+});
+
 
 $app->get('/test', function () {
     try {
