@@ -32,8 +32,15 @@ foreach ($finder as $file) {
     $json[$file->getFilenameWithoutExtension()] = json_decode($file->getContents(), true);
 }
 
-$app->get('/', function () use ($json) {
+$app->get('/', function () {
     return 'index';
+});
+
+$app->post('/', function () {
+    $appSecret = 'cn9kSx1i@fPJy';
+    $data = $this->request->all();var_dump($data['requestData']);
+    var_dump($data['sign'] == md5(base64_encode(strtolower($appSecret . $data['requestData'] . $appSecret))));
+    return [];
 });
 
 $app->post('/welcomeHome', function () use ($json) {
