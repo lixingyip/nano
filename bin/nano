@@ -29,6 +29,7 @@ $app->addListener(BootApplication::class, function () {
 $app->post('/', function (RequestInterface $request, ResponseInterface $response) {
     $data = $request->getParsedBody();
     $controller = Context::get('controller', null);
+    var_dump($controller);
     /** @var ContainerProxy $this */
     return $response->json(['json']);
 });
