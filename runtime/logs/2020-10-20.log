@@ -1,0 +1,9 @@
+
+[2020-10-20 17:38:45.370561] [ERROR](10001) in /opt/www/app/Middleware/ApiMiddleware.php:20
+[2020-10-20 17:44:16.737130] [ERROR](404)Not Found in /opt/www/app/Middleware/ApiMiddleware.php:20
+[2020-10-20 17:51:06.261327] [ERROR](404)Not Found in /opt/www/app/Middleware/ApiMiddleware.php:20
+[2020-10-20 17:51:06.486983] [ERROR](404)Not Found in /opt/www/app/Middleware/ApiMiddleware.php:20
+[2020-10-20 17:51:06.682900] [ERROR](404)Not Found in /opt/www/app/Middleware/ApiMiddleware.php:20
+[2020-10-20 17:51:06.812445] [ERROR](404)Not Found in /opt/www/app/Middleware/ApiMiddleware.php:20
+[2020-10-20 17:51:06.941203] [ERROR](404)Not Found in /opt/www/app/Middleware/ApiMiddleware.php:20
+[2020-10-20 17:51:14.773074] [ERROR](404)Not Found2 in /opt/www/app/Middleware/ApiMiddleware.php:20

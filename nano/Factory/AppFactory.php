@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace Nano\Factory;
 
+use App\Lib\Translate\Translate;
 use Dotenv\Dotenv;
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
@@ -118,13 +119,14 @@ class AppFactory
                 LogLevel::WARNING,
             ],
         ]);
-
         $finder = new Finder();
         $finder->files()->in(BASE_PATH . '/config')->name('*.php');
         foreach ($finder as $file) {
-            $config->set($file->getFilenameWithoutExtension(), require $file->getRealPath());
+            $key = $file->getFilenameWithoutExtension();
+            $value = $config->get($file->getFilenameWithoutExtension(), []);
+            $value = array_merge($value, require $file->getRealPath());
+            $config->set($key, $value);
         }
-
         $container = new Container(new DefinitionSource($config->get('dependencies')));
         $container->set(ConfigInterface::class, $config);
         $container->define(DispatcherFactory::class, DispatcherFactory::class);
@@ -145,6 +147,17 @@ class AppFactory
         ! defined('SWOOLE_HOOK_FLAGS') && define('SWOOLE_HOOK_FLAGS', $hookFlags);
     }
 
+    protected static function loadTranslate()
+    {
+        $finder = new Finder();
+        $finder->files()->in(BASE_PATH . '/storage/languages')->name('*.php');
+        $data = [];
+        foreach ($finder as $file) {
+            $data[$file->getFilenameWithoutExtension()] = require $file->getRealPath();
+        }
+        Translate::setMessage($data);
+    }
+
     /**
      * Create an application with a chosen preset.
      */
@@ -155,6 +168,9 @@ class AppFactory
 
         // Prepare env
         self::loadDotenv();
+
+        // Prepare translate
+        self::loadTranslate();
 
         // Prepare container
         $container = self::prepareContainer();

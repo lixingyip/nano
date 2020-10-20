@@ -5,37 +5,32 @@ declare(strict_types=1);
 
 namespace Bin;
 
+use App\Exception\Handler\ApiExceptionHandler;
+use App\Middleware\ApiMiddleware;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Framework\Event\BootApplication;
-use Hyperf\HttpMessage\Stream\SwooleStream;
+use Hyperf\Utils\Context;
 use Nano\ContainerProxy;
 use Nano\Factory\AppFactory;
+use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\HttpServer\Contract\ResponseInterface;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::createBase();
 
-$app->get('/', function () {
+$app->addMiddleware(ApiMiddleware::class);
+$app->addExceptionHandler(ApiExceptionHandler::class);
+$app->addListener(BootApplication::class, function () {
     /** @var ContainerProxy $this */
-    return $this->response->json(['nano']);
-});
-
-$app->post('/', function () {
-    /** @var ContainerProxy $this */
-    return $this->response->json(['json']);
-});
-
-$app->addMiddleware(function ($request, $handler) {
-    $request = $request->withAttribute('key', 'value');
-    return $handler->handle($request);
-});
-
-$app->addExceptionHandler(function ($throwable, $response) {var_dump($throwable->getMessage());
-    return $response->withStatus('418')->withBody(new SwooleStream('I\'m a teapot'));
-});
-
-$app->addListener(BootApplication::class, function ($event) {
     $this->get(StdoutLoggerInterface::class)->info('App started');
+});
+
+$app->post('/', function (RequestInterface $request, ResponseInterface $response) {
+    $data = $request->getParsedBody();
+    $controller = Context::get('controller', null);
+    /** @var ContainerProxy $this */
+    return $response->json(['json']);
 });
 
 $app->run();
