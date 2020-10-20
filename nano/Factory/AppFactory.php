@@ -11,6 +11,9 @@ declare(strict_types=1);
  */
 namespace Nano\Factory;
 
+use Dotenv\Dotenv;
+use Dotenv\Repository\Adapter\PutenvAdapter;
+use Dotenv\Repository\RepositoryBuilder;
 use Hyperf\Config\Config;
 use Hyperf\Config\ProviderConfig;
 use Hyperf\Contract\ConfigInterface;
@@ -83,6 +86,23 @@ class AppFactory
         return $app;
     }
 
+    protected static function loadDotenv(): void
+    {
+        if (file_exists(BASE_PATH . '/.env')) {
+            $repository = RepositoryBuilder::create()
+                ->withReaders([
+                    new PutenvAdapter(),
+                ])
+                ->withWriters([
+                    new PutenvAdapter(),
+                ])
+                ->immutable()
+                ->make();
+
+            Dotenv::create($repository, [BASE_PATH])->load();
+        }
+    }
+
     protected static function prepareContainer(): ContainerInterface
     {
         $config = new Config(ProviderConfig::load());
@@ -132,6 +152,9 @@ class AppFactory
     {
         // Setting ini and flags
         self::prepareFlags();
+
+        // Prepare env
+        self::loadDotenv();
 
         // Prepare container
         $container = self::prepareContainer();

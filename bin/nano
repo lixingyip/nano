@@ -6,116 +6,23 @@ declare(strict_types=1);
 namespace Bin;
 
 use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\DB\DB;
 use Hyperf\Framework\Event\BootApplication;
 use Hyperf\HttpMessage\Stream\SwooleStream;
+use Nano\ContainerProxy;
 use Nano\Factory\AppFactory;
-use Swlib\SaberGM;
-use Symfony\Component\Finder\Finder;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-class Foo
-{
-    public function bar()
-    {
-        return 'bar';
-    }
-}
-
 $app = AppFactory::createBase();
 
-$finder = new Finder();
-$finder->files()->in(BASE_PATH . '/json')->name('*.json');
-$json = [];
-foreach ($finder as $file) {
-    $json[$file->getFilenameWithoutExtension()] = json_decode($file->getContents(), true);
-}
-
 $app->get('/', function () {
-    return 'index';
+    /** @var ContainerProxy $this */
+    return $this->response->json(['nano']);
 });
 
 $app->post('/', function () {
-    $appSecret = 'cn9kSx1i@fPJy';
-    $data = $this->request->all();var_dump($data['requestData']);
-    var_dump($data['sign'] == md5(base64_encode(strtolower($appSecret . $data['requestData'] . $appSecret))));
-    return [];
-});
-
-$app->post('/welcomeHome', function () use ($json) {
-    return $this->response->json($json['welcomeHome']);
-});
-$app->post('/personinfoBusiness', function () use ($json) {
-    return $this->response->json($json['personinfoBusiness']);
-});
-$app->post('/uniformRecommend', function () use ($json) {
-    return $this->response->json($json['uniformRecommend']);
-});
-$app->post('/newAppCenterInfo', function () use ($json) {
-    return $this->response->json($json['newAppCenterInfo']);
-});
-$app->post('/commonCatalogs', function () use ($json) {
-    return $this->response->json($json['commonCatalogs']);
-});
-$app->post('/category', function () use ($json) {
-    return $this->response->json($json['category']);
-});
-$app->post('/newSubCatalog', function () use ($json) {
-    return $this->response->json($json['newSubCatalog']);
-});
-$app->post('/getCmsPromotionsListByCatelogyID', function () use ($json) {
-    return $this->response->json($json['getCmsPromotionsListByCatelogyID']);
-});
-$app->post('/wareBusiness', function () use ($json) {
-    return $this->response->json($json['wareBusiness']);
-});
-$app->post('/entranceCatalog', function () use ($json) {
-    return $this->response->json($json['entranceCatalog']);
-});
-$app->post('/cart', function () use ($json) {
-    return $this->response->json($json['cart']);
-});
-$app->post('/myjdSetBusiness', function () use ($json) {
-    return $this->response->json($json['myjdSetBusiness']);
-});
-
-
-$app->get('/test', function () {
-    try {
-//        $res = SaberGM::get('http://10.10.107.151:9502');var_dump($res->getBody()->getContents());
-        $requests = [];
-        for ($i = 6666; $i--;) {
-            $requests[] = ['uri' => 'http://10.10.107.151:9502'];
-        }
-        $res = SaberGM::requests($requests);
-        echo "use {$res->time}s\n";
-        echo "success: $res->success_num, error: $res->error_num";
-        return 'success';
-    } catch (\Exception $e) {
-        var_dump($e->getMessage());
-        return 'error';
-    }
-
-});
-
-$app->addGroup('/route', function () use ($app) {
-    $app->addRoute(['GET', 'POST'], '/{id:\d+}', function ($id) {
-        return '/route/' . $id;
-    });
-    $app->put('/{name:.+}', function ($name) {
-        return '/route/' . $name;
-    });
-});
-
-$app->get('/di', function () {
     /** @var ContainerProxy $this */
-    $foo = $this->get(Foo::class);
-    return $foo->bar();
-});
-
-$app->get('/middleware', function () {
-    return $this->request->getAttribute('key');
+    return $this->response->json(['json']);
 });
 
 $app->addMiddleware(function ($request, $handler) {
@@ -123,45 +30,12 @@ $app->addMiddleware(function ($request, $handler) {
     return $handler->handle($request);
 });
 
-$app->get('/exception', function () {
-    throw new \Exception();
-});
-
-$app->addExceptionHandler(function ($throwable, $response) {
+$app->addExceptionHandler(function ($throwable, $response) {var_dump($throwable->getMessage());
     return $response->withStatus('418')->withBody(new SwooleStream('I\'m a teapot'));
-});
-
-$app->addCommand('echo', function () {
-    $this->get(StdoutLoggerInterface::class)->info('A new command called echo!');
 });
 
 $app->addListener(BootApplication::class, function ($event) {
     $this->get(StdoutLoggerInterface::class)->info('App started');
 });
-
-//$app->addProcess(function () {
-//    while (true) {
-//        sleep(1);
-//        $this->get(StdoutLoggerInterface::class)->info('Processing...');
-//    }
-//});
-//
-//$app->addCrontab('* * * * * *', function () {
-//    $this->get(StdoutLoggerInterface::class)->info('execute every second!');
-//});
-
-//$app->config([
-//    'db.default' => [
-//        'host' => env('DB_HOST', 'localhost'),
-//        'port' => env('DB_PORT', 3306),
-//        'database' => env('DB_DATABASE', 'hyperf'),
-//        'username' => env('DB_USERNAME', 'root'),
-//        'password' => env('DB_PASSWORD', ''),
-//    ],
-//]);
-//
-//$app->get('/db', function () {
-//    return DB::query('SELECT * FROM `user` WHERE gender = ?;', [1]);
-//});
 
 $app->run();
