@@ -3,4 +3,4 @@
 use Hyperf\HttpServer\Router\Router;
 use App\Controller\IndexController;
 
-Router::addRoute(['POST'], '/', [IndexController::class, 'index']);
+Router::addRoute(['GET', 'POST'], '/', [IndexController::class, 'index']);
