@@ -8,7 +8,7 @@
 
 # Nano Fast Api Framework
 
-Nano 是一款零配置、无骨架、极小化的 Hyperf 发行版，本项目基于 Nano 进行二次封装， 可以快速开发高并发、快响应的api应用。   
+Nano 是一款零配置、无骨架、极小化的 Hyperf 发行版，本项目基于 Nano 进行二次封装， 可以快速开发轻量级、高性能的api应用。   
 
 ## 功能
 

@@ -6,9 +6,9 @@ English | [中文](./README-CN.md)
   <a href="https://github.com/hyperf/nano/blob/master/LICENSE"><img src="https://img.shields.io/github/license/hyperf/nano.svg?maxAge=2592000" alt="Nano License"></a>
 </p>
 
-# Nano Fast Api Framework
+# Nano Api 框架
 
-Nano is a zero-config, no skeleton, minimal Hyperf distribution. This project is based on Nano for secondary packaging, which can quickly develop high-concurrency and fast-response api applications.
+Nano is a zero-config, no skeleton, minimal Hyperf distribution. This project is based on Nano for secondary packaging, which can quickly develop lightweight and high-performance api applications.
 
 ## 功能
 
