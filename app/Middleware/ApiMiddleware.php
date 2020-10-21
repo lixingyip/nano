@@ -2,6 +2,7 @@
 
 namespace App\Middleware;
 
+use App\Controller\BaseController;
 use App\Exception\ApiException;
 use App\Lib\Translate\Translate;
 use Hyperf\Utils\Context;
@@ -31,10 +32,14 @@ class ApiMiddleware implements MiddlewareInterface
         if (!class_exists($controller)) {
             throw new ApiException(404);
         }
+        $controller = new $controller();
+        if(!is_subclass_of($controller, BaseController::class)) {
+            throw new ApiException(404);
+        }
 
         Context::set('lang', $lang);
         Context::set('method', $method);
-        Context::set('controller', new $controller($data));
+        Context::set('controller', $controller);
 
         return $handler->handle($request);
     }

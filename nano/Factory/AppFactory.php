@@ -11,7 +11,9 @@ declare(strict_types=1);
  */
 namespace Nano\Factory;
 
+use App\Exception\Handler\ApiExceptionHandler;
 use App\Lib\Translate\Translate;
+use App\Middleware\ApiMiddleware;
 use Dotenv\Dotenv;
 use Dotenv\Repository\Adapter\PutenvAdapter;
 use Dotenv\Repository\RepositoryBuilder;
@@ -22,6 +24,7 @@ use Hyperf\Contract\ContainerInterface;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Di\Container;
 use Hyperf\Di\Definition\DefinitionSource;
+use Hyperf\Framework\Event\BootApplication;
 use Hyperf\HttpServer\Exception\Handler\HttpExceptionHandler;
 use Hyperf\HttpServer\Router\DispatcherFactory;
 use Hyperf\Utils\ApplicationContext;
@@ -66,7 +69,14 @@ class AppFactory
             'server.servers.0.host' => $host,
             'server.servers.0.port' => $port,
         ]);
-        $app->addExceptionHandler(HttpExceptionHandler::class);
+        $app->initRoute();
+        $app->addExceptionHandler(ApiExceptionHandler::class);
+        $app->addMiddleware(ApiMiddleware::class);
+        $app->addListener(BootApplication::class, function () {
+            /** @var ContainerProxy $this */
+            $this->get(StdoutLoggerInterface::class)->info('App started');
+        });
+
         return $app;
     }
 

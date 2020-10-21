@@ -5,33 +5,10 @@ declare(strict_types=1);
 
 namespace Bin;
 
-use App\Exception\Handler\ApiExceptionHandler;
-use App\Middleware\ApiMiddleware;
-use Hyperf\Contract\StdoutLoggerInterface;
-use Hyperf\Framework\Event\BootApplication;
-use Hyperf\Utils\Context;
-use Nano\ContainerProxy;
 use Nano\Factory\AppFactory;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = AppFactory::createBase();
-
-$app->addMiddleware(ApiMiddleware::class);
-$app->addExceptionHandler(ApiExceptionHandler::class);
-$app->addListener(BootApplication::class, function () {
-    /** @var ContainerProxy $this */
-    $this->get(StdoutLoggerInterface::class)->info('App started');
-});
-
-$app->post('/', function (RequestInterface $request, ResponseInterface $response) {
-    $data = $request->getParsedBody();
-    $controller = Context::get('controller', null);
-    var_dump($controller);
-    /** @var ContainerProxy $this */
-    return $response->json(['json']);
-});
 
 $app->run();

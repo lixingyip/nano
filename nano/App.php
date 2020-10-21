@@ -17,6 +17,8 @@ use Hyperf\Contract\ContainerInterface;
 use Hyperf\Crontab\Crontab;
 use Hyperf\Crontab\Process\CrontabDispatcherProcess;
 use Hyperf\HttpServer\Router\DispatcherFactory;
+use Hyperf\HttpServer\Router\Router;
+use Hyperf\Utils\ApplicationContext;
 use Nano\Factory\CommandFactory;
 use Nano\Factory\CronFactory;
 use Nano\Factory\ExceptionHandlerFactory;
@@ -24,6 +26,7 @@ use Nano\Factory\MiddlewareFactory;
 use Nano\Factory\ProcessFactory;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use Symfony\Component\Finder\Finder;
 
 /**
  * @method get($route, $handler, array $options = [])
@@ -81,6 +84,7 @@ class App
      */
     public function run()
     {
+        ApplicationContext::setContainer($this->container);
         $application = $this->container->get(\Hyperf\Contract\ApplicationInterface::class);
         $application->run();
     }
@@ -101,6 +105,19 @@ class App
     public function getContainer(): ContainerInterface
     {
         return $this->container;
+    }
+
+    /**
+     * init Route
+     */
+    public function initRoute(): void
+    {
+        Router::init($this->dispatcherFactory);
+        $finder = new Finder();
+        $finder->files()->in(BASE_PATH . '/route')->name('*.php');
+        foreach ($finder as $route) {
+            require_once $route;
+        }
     }
 
     /**

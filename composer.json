@@ -12,7 +12,8 @@
         "psr-4": {
             "Nano\\": "nano/",
             "App\\": "app/"
-        }
+        },
+        "files": ["app/Helper/functions.php"]
     },
     "require": {
         "php": ">=7.3",
