@@ -11,10 +11,11 @@ class Translate
 
     private static $messages = [];
 
-    public static function getMessage(int $code): string
+    public static function getMessage(int $code, string $message = ''): string
     {
         $lang = Context::get('lang', 'zh_CN');
-        return self::$messages[$lang][$code] ?? '';
+        $messages = explode('|', $message);
+        return sprintf(self::$messages[$lang][$code] ?? '', ...$messages);
     }
 
     public static function setMessage(array $data): void

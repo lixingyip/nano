@@ -19,7 +19,7 @@ class IndexController
 
     public function index(): array
     {
-        $data = $this->request->getParsedBody();
+        $data = $this->request->all();
         /* @var BaseController $controller*/
         $controller = Context::get('controller', null);
 

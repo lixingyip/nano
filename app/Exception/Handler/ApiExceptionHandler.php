@@ -15,7 +15,7 @@ use Throwable;
 class ApiExceptionHandler extends ExceptionHandler
 {
     /**
-     * @var StdoutLoggerInterface
+     * @var StdoutLoggerInterface|LoggerFactory
      */
     protected $logger;
 
@@ -24,10 +24,13 @@ class ApiExceptionHandler extends ExceptionHandler
      */
     protected $formatter;
 
-    public function __construct(StdoutLoggerInterface $logger, FormatterInterface $formatter)
+    public function __construct(FormatterInterface $formatter)
     {
-//        $this->logger = $logger->get('nano');
-        $this->logger = $logger;
+        if (env('APP_ENV', 'dev') == 'dev') {
+            $this->logger = container()->get(StdoutLoggerInterface::class);
+        } else {
+            $this->logger = container()->get(LoggerFactory::class)->get();
+        }
         $this->formatter = $formatter;
     }
 
@@ -44,7 +47,7 @@ class ApiExceptionHandler extends ExceptionHandler
 
         return $response->withBody(new SwooleStream(json_encode([
             'status' => false,
-            'code' => $throwable->getCode(),
+            'code' => $throwable->getCode() ?: 400,
             'message' => $throwable->getMessage(),
         ], JSON_UNESCAPED_UNICODE)));
     }

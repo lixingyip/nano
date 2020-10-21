@@ -10,6 +10,6 @@ class GetInfo extends BaseController
 {
     public function process(array $data): array
     {
-       return $this->success(['info']);
+       return $this->success($data);
     }
 }

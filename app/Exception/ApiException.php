@@ -16,10 +16,9 @@ class ApiException extends \Exception
     public function __construct(int $code, string $message = '')
     {
         $this->code = $code;
-        $translate = Translate::getMessage($this->code);
-        $message = sprintf($translate, $message);
+        $content = Translate::getMessage($this->code, $message);
 
-        parent::__construct($message, $code);
+        parent::__construct($content, $code);
     }
 
 }
