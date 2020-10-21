@@ -15,7 +15,7 @@ class ApiMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $data = $request->getParsedBody();
+        $data = array_merge($request->getParsedBody(), $request->getQueryParams());
         $lang = $data['lang'] ?? '';
         !in_array($lang, Translate::ACCEPT_LANG) && $lang = Translate::DEFAULT_LANG;
         $method = $data['method'] ?? '';
