@@ -6,7 +6,7 @@
   <a href="https://github.com/hyperf/nano/blob/master/LICENSE"><img src="https://img.shields.io/github/license/hyperf/nano.svg?maxAge=2592000" alt="Nano License"></a>
 </p>
 
-# Nano Fast Api Framework
+# Nano Api Framework
 
 Nano 是一款零配置、无骨架、极小化的 Hyperf 发行版，本项目基于 Nano 进行二次封装， 可以快速开发轻量级、高性能的api应用。   
 
