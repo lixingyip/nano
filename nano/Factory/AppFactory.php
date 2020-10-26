@@ -80,23 +80,6 @@ class AppFactory
         return $app;
     }
 
-    /**
-     * @param string $host
-     * @param int $port
-     * @return App
-     */
-    public static function createWebsocket(string $host = '0.0.0.0', int $port = 9502): App
-    {
-        $app = self::createApp();
-        $app->config([
-            'server' => Preset::websocket(),
-            'server.servers.0.host' => $host,
-            'server.servers.0.port' => $port,
-        ]);
-        $app->addExceptionHandler(HttpExceptionHandler::class);
-        return $app;
-    }
-
     protected static function loadDotenv(): void
     {
         if (file_exists(BASE_PATH . '/.env')) {
